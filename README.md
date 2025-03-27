@@ -10,7 +10,8 @@ This project demonstrates a test automation framework built using Selenium, Cucu
 * **Maven:** Build automation and dependency management.
 * **TestNG:** Testing framework.
 
-##Project Structure
+## Project Structure
+
 * **`src/main/java/repo`:** Contains application code.
 * **`src/test/java/stepdefinition`:** Holds the step definition classes, which map Gherkin steps to Java code.
 * **`src/test/java/runners`:** Contains the Cucumber test runner class.
