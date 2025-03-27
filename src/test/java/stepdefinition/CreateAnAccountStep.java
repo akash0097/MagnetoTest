@@ -7,6 +7,7 @@ import org.magentotest.repo.CreateAnAccountRepo;
 import org.magentotest.repo.SignInRepo;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import utility.Support;
 
 public class CreateAnAccountStep {
 
@@ -35,6 +36,7 @@ public class CreateAnAccountStep {
 
     @And("click on create an account button")
     public void click_on_create_an_account_button() {
+        Support.scrollToBottom(driver);
         createAnAccountRepo.ClickOnCreateAnAccountButton();
     }
 
@@ -49,14 +51,9 @@ public class CreateAnAccountStep {
         createAnAccountRepo.ClickOnSignOutLink();
     }
 
-    @And("click on sign in link")
-    public void click_on_sign_in_link() {
-        signInRepo.ClickOnSignInLink();
-    }
-
     @And("enter correct credentials")
     public void enter_correct_credentials() {
-        signInRepo.EnterEmail();
+        signInRepo.EnterGeneratedEmail(createAnAccountRepo.getGeneratedEmail());
         signInRepo.EnterPassword();
     }
 
@@ -67,6 +64,6 @@ public class CreateAnAccountStep {
 
     @Then("verify user is signed in successfully")
     public void verify_user_is_signed_in_successfully() {
-        Assert.assertEquals(createAnAccountRepo.getLandingPageHeaderText(), "Home Page");
+        Assert.assertTrue (createAnAccountRepo.getLandingPageGreetingText().contains("Welcome"));
     }
 }

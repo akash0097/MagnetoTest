@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import utility.ConfigReader;
 
+import java.time.Duration;
+
 public class Hooks {
     public static WebDriver driver;
 
@@ -14,7 +16,7 @@ public class Hooks {
         String browser = ConfigReader.getProperty("browser");
         String baseUrl = ConfigReader.getProperty("baseUrl");
 
-        if(browser.equals("Chrome")){
+        if(browser.equals("chrome")){
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.get(baseUrl);

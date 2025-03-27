@@ -2,6 +2,8 @@ package org.magentotest.repo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -21,11 +23,11 @@ public class CreateAnAccountRepo {
     private final By email = By.xpath("//input[@id='email_address']");
     private final By password = By.xpath("//input[@id='password']");
     private final By confirmPassword = By.xpath("//input[@id='password-confirmation']");
-    private final By createAnAccountBtn = By.xpath("//button[@title='Create an Account']");
+    private final By createAnAccountBtn = By.xpath("//button[@title='Create an Account']/span");
     private final By registeringSuccessMeg = By.xpath("//div[@role='alert']//div[contains(text(),'Thank you for registering with Main Website Store.')]");
     private final By menuBesideGreetingExpandIcon = By.xpath("//div[@class='panel header']//button[@class='action switch']");
     private final By signOutLink = By.xpath("(//div[@class='panel header']//a[contains(text(),'Sign Out')])[1]");
-    private final By landingPageHeaderText = By.xpath("//h1//span[contains(text(),'Home Page')]");
+    private final By landingPageGreetingText = By.xpath("(//li[@class='greet welcome']/span[contains(text(),'Welcome')])[1]");
 
     private String generatedEmail;
 
@@ -62,7 +64,9 @@ public class CreateAnAccountRepo {
     }
 
     public void ClickOnCreateAnAccountButton(){
+
         driver.findElement(createAnAccountBtn).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public boolean isRegisteringSuccessMsgDisplayed(){
@@ -78,13 +82,16 @@ public class CreateAnAccountRepo {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    public String getLandingPageHeaderText(){
-        return driver.findElement(landingPageHeaderText).getText();
+    public String getLandingPageGreetingText(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement visibleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(landingPageGreetingText));
+        return driver.findElement(landingPageGreetingText).getText();
     }
 
     private String getRandomEmailId() {
         Random random = new Random();
-        generatedEmail = "AutomationTest" + random.ints(1, 1000)+ " @gmail.com";
+        int randomNumber = random.nextInt(1000);
+        generatedEmail = "AutomationTest" + randomNumber + "@gmail.com";
         return generatedEmail;
     }
 }

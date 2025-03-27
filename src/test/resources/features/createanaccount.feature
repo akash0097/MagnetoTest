@@ -10,7 +10,7 @@ Feature: Create An Account functionality
     And click on create an account button
     Then verify the registering success message
     And sign out the application
-    And click on sign in link
+    Given click on sign in link
     And enter correct credentials
     And click on sign in button
     Then verify user is signed in successfully
